@@ -9,6 +9,8 @@ import ArticlePreview from '../components/article-preview'
 
 class BlogIndex extends React.Component {
   render() {
+
+    return null;
     const posts = get(this, 'props.data.allContentfulBlogPost.nodes')
 
     return (
@@ -22,7 +24,7 @@ class BlogIndex extends React.Component {
 }
 
 export default BlogIndex
-
+/*
 export const pageQuery = graphql`
   query BlogIndexQuery {
     allContentfulBlogPost(sort: { fields: [publishDate], order: DESC }) {
@@ -48,3 +50,4 @@ export const pageQuery = graphql`
     }
   }
 `
+*/

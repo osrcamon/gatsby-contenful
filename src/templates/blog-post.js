@@ -10,7 +10,24 @@ import * as styles from './blog-post.module.css'
 
 class BlogPostTemplate extends React.Component {
   render() {
-    const post = get(this.props, 'data.contentfulBlogPost')
+    const post = get(this.props, 'data.contentfulBlogPost');
+    console.log(post.description);
+
+    const description = JSON.parse(post.description.raw).content;
+    console.log(description)
+    console.log(description.map(line => line.content[0].value))
+    return (
+      <div>
+        <h1>{post.title}</h1>
+        <div>
+          {description.map(line => <p>{line.content[0].value}</p>)}
+        </div>
+        <div><a href="/">Back to index</a></div>
+      </div>
+      
+    );
+
+
     const previous = get(this.props, 'data.previous')
     const next = get(this.props, 'data.next')
 
@@ -69,6 +86,21 @@ class BlogPostTemplate extends React.Component {
 
 export default BlogPostTemplate
 
+
+export const pageQuery = graphql`
+  query BlogPostBySlug(
+    $slug: String!
+  ) {
+    contentfulBlogPost(slug: { eq: $slug }) {
+      slug
+      title
+      description {
+        raw
+      }
+    }
+  }
+`
+/*
 export const pageQuery = graphql`
   query BlogPostBySlug(
     $slug: String!
@@ -112,3 +144,4 @@ export const pageQuery = graphql`
     }
   }
 `
+*/
